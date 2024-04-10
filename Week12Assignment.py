@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 """
 Created on Tue Apr  9 13:40:56 2024
@@ -11,15 +12,6 @@ def compute_stroke_volume(v_h):
     stroke_volume = np.max(v_h[int(len(v_h)/3):]) - np.min(v_h[int(len(v_h)/3):])
     return stroke_volume
 
-def bounded_exponential(x):
-    L = 0.56  # Upper bound
-    lower_bound = 0.4  # Lower bound
-    k = 0.1  # Growth rate, adjust as needed
-    x0 = 0  # Midpoint, adjust as needed
-    
-    # Apply the logistic function
-    return lower_bound + (L - lower_bound) / (1 + np.exp(-k * (x - x0)))
-
 dt = 1/100
 time_sec = 60
 time = np.arange(0, time_sec, dt)
@@ -29,7 +21,7 @@ v_al = np.zeros(len(time))
 v_vl = np.zeros(len(time))
 v_v = np.zeros(len(time))
 v_h = np.zeros(len(time))
-v_h[0] = 20
+v_h[0] = 25
 v_a[0] = 15
 v_al[0] = 5
 v_vl[0] = 5
@@ -42,9 +34,9 @@ e_v = lambda x: .5 * x - .5*v_v[0]
 
 r_ao = 1
 r_a = 1
-r_c = 1
-r_v = 1
-r_ve = 1
+r_c = .6
+r_v = .6
+r_ve = .4
 
 stroke_volume_list = []
 cardiac_output_list = []
