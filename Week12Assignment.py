@@ -48,10 +48,11 @@ r_ve = 1
 
 stroke_volume_list = []
 cardiac_output_list = []
-heart_rate_list = []
+heart_rate_list = [10,20,30,40,60,100,120,150, 200]
 
-percent_contract = lambda x: -0.00075 * x + .55
-for j in range(5, 200, 5):
+#percent_contract = lambda x: -0.00075 * x + .55
+percent_contract = lambda x: 0.5
+for j in heart_rate_list:
     
     v_a = np.zeros(len(time))
     v_al = np.zeros(len(time))
@@ -132,10 +133,9 @@ for j in range(5, 200, 5):
     
     stroke_volume = compute_stroke_volume(v_h)
     stroke_volume_list.append(stroke_volume)
-    heart_rate_list.append(j)
 
 # %%
-stroke_volume_list[7] = (stroke_volume_list[8] + stroke_volume_list[6])/2
+#stroke_volume_list[7] = (stroke_volume_list[8] + stroke_volume_list[6])/2
 cardiac_output_list = np.array(stroke_volume_list) * np.array(heart_rate_list)
 plt.figure()
 plt.plot(heart_rate_list, stroke_volume_list)
@@ -144,7 +144,6 @@ plt.title("Stroke Volume vs Heart Rate")
 plt.figure()
 plt.plot(heart_rate_list, cardiac_output_list)
 plt.title("Cardiac Output vs Heart Rate")
-
 
 
 
